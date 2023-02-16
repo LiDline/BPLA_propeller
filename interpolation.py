@@ -7,9 +7,10 @@ from scipy import interpolate
 
 file = (os.path.abspath('calculation results/BPLA, series 1.csv')).replace('\\', '/')
 df = pd.read_csv(file, sep = ',', skiprows=3)
-df.rename({'P1': 'a, град','P2': 'n, об/мин','P6': 'mx, Н*м','P7': 'fx, Н',}, axis=1, inplace=True) 
+df.rename({'P7': 'a, град','P8': 'n, об/мин','P3': 'fx, Н','P4': 'mx, Н*м',}, axis=1, inplace=True) 
 df = pd.DataFrame(df.iloc[:,1:])
 df['n, об/мин'] *=-1
+df['a, град'] *=-1
 #______________________________________________________________________________________________________
 
 """Количество значений после расчётов"""
@@ -136,7 +137,7 @@ for i in range (0, len(mx_str)//len(list1)):
     k += a_step_inter
 # print(len(a_str), a_str)
 
-df_inter = pd.DataFrame(columns = ['a, град','n, об/мин','mx, Н*м','fx, Н',])
+df_inter = pd.DataFrame(columns = ['a, град','n, об/мин','fx, Н','mx, Н*м',])
 
 df_inter['a, град'] = a_str
 df_inter['n, об/мин'] = n_str
