@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 import numpy as np
-from scipy import interpolate
+import scipy.interpolate as spi
 
 """Загрузка таблицы"""
 
@@ -41,7 +41,7 @@ list1 = []
 for l in range (0, len(name)):
     for j in range (0, (len(fx)//n_counter_0)):
         R1 = np.array(df.loc[i:i+n_counter_0-1, name[l]].values)
-        f = interpolate.interp1d(n, R1, kind = 'cubic')
+        f = spi.interp1d(n, R1, kind = 'cubic')
         list1 = f(np.arange(int(df['n, об/мин'].min()), int(df['n, об/мин'].max())+n_step_inter, n_step_inter))
         parametr = np.append(parametr, list1)
         i += n_counter_0
@@ -49,18 +49,14 @@ for l in range (0, len(name)):
 
 mx_inter_n = parametr[name.index('mx, Н*м')*counter_after_inter_n : name.index('mx, Н*м')*counter_after_inter_n + counter_after_inter_n]
 fx_inter_n = parametr[name.index('fx, Н')*counter_after_inter_n : name.index('fx, Н')*counter_after_inter_n + counter_after_inter_n]
+# print(fx_inter_n)
 
 """Интерполяция по a"""
 
 a = np.arange(df['a, град'].min(), df['a, град'].max()+a_step, a_step)
-# counter_after_inter_a = (len(np.arange(int(df['n, об/мин'].min()), int(df['n, об/мин'].max())+n_step_inter, n_step_inter))*
-#                         len(np.arange(int(df['a, град'].min()), int(df['a, град'].max())+a_step_inter, a_step_inter)))
 
 # записал новые значения в виде матрицы, где каждая строка - это h2
-i = 0
-j = 0
 k = 0
-
 mx_matrix = np.zeros((len(mx_inter_n)//len(list1), len(list1)))
 fx_matrix = np.zeros((len(mx_inter_n)//len(list1), len(list1)))
 
@@ -81,17 +77,13 @@ def inter_a (matrix1, matrix2):
     R2 = []
     R3 = []
 
-    i = 0
-    j = 0
-    k = 0
-
     for i in range (0, len(list1)):
         R1 = np.array(matrix1[:,i:i+1])
         R4 = []
-        for j in range (0, len(R1),a_counter_0):
+        for j in range (0, len(R1), a_counter_0):
             R2 = R1[j:j+a_counter_0].transpose()
-            f = interpolate.interp1d(a, R2, kind = 'cubic')
-            R3 = (f(np.arange(df['a, град'].min(), df['a, град'].max()+a_step_inter, a_step_inter)))
+            f = spi.interp1d(a, R2, fill_value="extrapolate", kind = 'cubic')
+            R3 = f(np.arange(df['a, град'].min(), df['a, град'].max()+a_step_inter, a_step_inter))
             R4 = np.array(np.append(R4, R3))
             R5 = np.zeros((len(R4),1)) 
             for k in range(0, len(R4)):
@@ -103,10 +95,7 @@ mx_matrix = inter_a(mx_matrix, mx_inter_matrix)
 fx_matrix = inter_a(fx_matrix, fx_inter_matrix)
 
 # записал новые значения в виде строки для таблицы
-i = 0
-j = 0
 k = 0
-
 mx_str = np.zeros(len(np.arange(df['a, град'].min(), df['a, град'].max()+a_step_inter, a_step_inter))*
                               len(mx_inter_matrix[:1,:].transpose()))
 fx_str = np.zeros(len(np.arange(df['a, град'].min(), df['a, град'].max()+a_step_inter, a_step_inter))*
@@ -142,7 +131,9 @@ df_inter = pd.DataFrame(columns = ['a, град','n, об/мин','fx, Н','mx, 
 df_inter['a, град'] = a_str
 df_inter['n, об/мин'] = n_str
 df_inter['mx, Н*м'] = mx_str
-df_inter['fx, Н'] = fx_str
+df_inter['Fx, Н'] = fx_str
 df_inter["Wв, Вт"] = df_inter['n, об/мин']*df_inter['mx, Н*м']*np.pi/30
+df_inter['P, Н/Вт'] = df_inter['Fx, Н'] / df_inter['Wв, Вт']
+# df_inter['P, Н/Вт'].replace(np.nan, 0, inplace=True)
 
 df_inter.to_csv('BPLA, series 1 - инт.csv')
