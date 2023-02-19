@@ -82,7 +82,7 @@ def inter_a (matrix1, matrix2):
         R4 = []
         for j in range (0, len(R1), a_counter_0):
             R2 = R1[j:j+a_counter_0].transpose()
-            f = spi.interp1d(a, R2, fill_value="extrapolate", kind = 'cubic')
+            f = spi.interp1d(a, R2, kind = 'cubic') # fill_value="extrapolate",
             R3 = f(np.arange(df['a, град'].min(), df['a, град'].max()+a_step_inter, a_step_inter))
             R4 = np.array(np.append(R4, R3))
             R5 = np.zeros((len(R4),1)) 
