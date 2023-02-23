@@ -20,6 +20,7 @@ n_step = 2000
 
 a_counter_0 = round((df['a, град'].max() - df['a, град'].min())/a_step + 1)
 n_counter_0 = round((df['n, об/мин'].max() - df['n, об/мин'].min())/n_step + 1)
+# print(a_counter_0)
 
 """Шаги интерполяции"""
 
@@ -31,6 +32,7 @@ n_step_inter = 1000
 name = ['mx, Н*м', 'fx, Н']
 n = np.array(df.loc[:n_counter_0-1, 'n, об/мин'].values)
 fx = np.array(df.loc[:, 'fx, Н'].values)
+# print(fx)
 
 counter_after_inter_n = a_counter_0 * len(np.arange(int(df['n, об/мин'].min()), int(df['n, об/мин'].max())+n_step_inter, n_step_inter))
 
