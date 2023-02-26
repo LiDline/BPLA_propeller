@@ -128,7 +128,7 @@ for i in range (0, len(mx_str)//len(list1)):
     k += a_step_inter
 # print(len(a_str), a_str)
 
-df_inter = pd.DataFrame(columns = ['a, град','n, об/мин','fx, Н','mx, Н*м',])
+df_inter = pd.DataFrame(columns = ['a, град','n, об/мин','Fx, Н','mx, Н*м',])
 
 df_inter['a, град'] = a_str
 df_inter['n, об/мин'] = n_str
