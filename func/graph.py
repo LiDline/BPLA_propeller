@@ -119,12 +119,33 @@ class graph:
 
 
     # Линия пересечения
-    def cross_line(self, x, z, f):
+    def cross_line(self, x, z, f, color='black', showlegend=True):
         self.fig.add_trace(go.Scatter3d(x=x, y=list(range(0, round(max(self.df['a, град']))+1, 1)), z=z, 
-                                    showlegend=True, name = f'Fx = {f} Н', legendgroup=f"group{f}", 
+                                    showlegend=showlegend, name = f'Fx = {f} Н', legendgroup=f"group{f}", 
                                     opacity = 1, marker=dict(size=1,color='black',colorscale='Viridis',),
-                                    line=dict(color='black', width=5)))
-        
+                                    line=dict(color=color, width=6)))
+
+
+    def basic_line(self, x, y, f):
+        self.cross_line(x, [0]*len(x), f, 'yellow', False)
+
+        for i in range (0, len(x), 4):
+            self.fig.add_trace(go.Scatter3d(x=[x[i], x[i]], y=[y[i], y[i]], 
+                                       z=[35, 0], showlegend=False,
+                                       legendgroup=f"group{f}",  opacity=1,
+                                       marker=dict(size=1, color='royalblue', colorscale='Viridis',), 
+                                       line=dict(color='firebrick', width=6, dash='dash')))
+            self.fig.add_trace(go.Scatter3d(x=[x[i], 0], y=[y[i], y[i]], z=[0,0], 
+                                            showlegend=False,
+                                            legendgroup=f"group{f}",  opacity=1,
+                                            marker=dict(size=1, color='royalblue', colorscale='Viridis',), 
+                                            line=dict(color='royalblue', width=1)))
+            self.fig.add_trace(go.Scatter3d(x=[x[i], x[i]], y=[y[i], 0], 
+                                       z=[0, 0], showlegend=False,
+                                       legendgroup=f"group{f}",  opacity=1,
+                                       marker=dict(size=1, color='royalblue', colorscale='Viridis',), 
+                                       line=dict(color='royalblue', width=1)))
+
 
     # Горизонтальная плоскость                                            
     def horizontal_cross_palne(self, f):
