@@ -129,22 +129,55 @@ class graph:
     def basic_line(self, x, y, f):
         self.cross_line(x, [0]*len(x), f, 'yellow', False)
 
-        for i in range (0, len(x), 4):
-            self.fig.add_trace(go.Scatter3d(x=[x[i], x[i]], y=[y[i], y[i]], 
-                                       z=[35, 0], showlegend=False,
-                                       legendgroup=f"group{f}",  opacity=1,
-                                       marker=dict(size=1, color='royalblue', colorscale='Viridis',), 
-                                       line=dict(color='firebrick', width=6, dash='dash')))
-            self.fig.add_trace(go.Scatter3d(x=[x[i], 0], y=[y[i], y[i]], z=[0,0], 
-                                            showlegend=False,
-                                            legendgroup=f"group{f}",  opacity=1,
-                                            marker=dict(size=1, color='royalblue', colorscale='Viridis',), 
-                                            line=dict(color='royalblue', width=1)))
-            self.fig.add_trace(go.Scatter3d(x=[x[i], x[i]], y=[y[i], 0], 
-                                       z=[0, 0], showlegend=False,
-                                       legendgroup=f"group{f}",  opacity=1,
-                                       marker=dict(size=1, color='royalblue', colorscale='Viridis',), 
-                                       line=dict(color='royalblue', width=1)))
+        for i in range(0, len(x), 4):
+             self.fig.add_trace(go.Scatter3d(x=[x[i], x[i]], y=[y[i], y[i]], 
+                                   z=[35, 0], showlegend=False,
+                                   legendgroup=f"group{f}",  opacity=1,
+                                   marker=dict(size=1, color='royalblue', colorscale='Viridis',), 
+                                   line=dict(color='black', width=6, dash='dash')))
+        
+    def annotation(self, x, y, f):
+            
+        self.fig.add_trace(go.Scatter3d(x=[x[30], x[30]], y=[y[30], y[30]], 
+                                   z=[35, 0], showlegend=False,
+                                   legendgroup=f"group{f}",  opacity=1,
+                                   marker=dict(size=1, color='royalblue', colorscale='Viridis',), 
+                                   line=dict(color='black', width=6)))
+        self.fig.add_trace(go.Scatter3d(x=[x[30], 0], y=[y[30], y[30]], z=[0,0], 
+                                        showlegend=False,
+                                        legendgroup=f"group{f}",  opacity=1,
+                                        marker=dict(size=3, color='royalblue', colorscale='Viridis',), 
+                                        line=dict(color='royalblue', width=4)))
+        self.fig.add_trace(go.Scatter3d(x=[x[30], x[30]], y=[y[30], 0], 
+                                   z=[0, 0], showlegend=False,
+                                   legendgroup=f"group{f}",  opacity=1,
+                                   marker=dict(size=3, color='royalblue', colorscale='Viridis',), 
+                                   line=dict(color='royalblue', width=4)))
+
+            #Точка пересечения
+        self.fig.update_layout(
+            scene=dict(
+            annotations=[dict(x=0, y=y[30], z=0,
+                            text=f"{round(y[30])} [град]", textangle=0, ax=20, ay=-40,
+                            bordercolor="#c7c7c7", borderwidth=2, borderpad=4, 
+                            bgcolor="white", opacity=0.8,
+                            font=dict(color="black", size=12),arrowcolor="black", arrowsize=1, 
+                            arrowwidth=1, arrowhead=1),
+
+                            dict(x=x[30], y=0, z=0,
+                                text=f"{round(x[30])} [об/мин]", textangle=0, ax=-20, ay=-40,
+                                bordercolor="#c7c7c7", borderwidth=2, borderpad=4,
+                                bgcolor="White", opacity=0.8,
+                                font=dict( color="black", size=12),
+                                arrowcolor="black", arrowsize=1, arrowwidth=1, arrowhead=1),
+
+                            dict(x=x[30], y=y[30], z=f, text="Линия пересечения", 
+                                textangle=0, ax=-42, ay=-60, 
+                                bordercolor="#c7c7c7", borderwidth=2, borderpad=4, 
+                                bgcolor="white", opacity=0.8,
+                                font=dict( color="black", size=12),
+                                arrowcolor="black", arrowsize=1, arrowwidth=1, arrowhead=1),
+                                ]))
 
 
     # Горизонтальная плоскость                                            
