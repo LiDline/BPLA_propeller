@@ -3,12 +3,13 @@ from dash import Dash, html, dcc, Output, Input
 import dash_bootstrap_components as dbc
 
 
+from func.prepare_data import prepare_data
 from func.tabs import tabs
-from func.data_for_plot import data_for_plot
+from func.data_for_dropdown_plot import data_for_dropdown_plot
 
-'''Data for graphs'''
-
-di = data_for_plot()
+'''Data for dropdown graphs'''
+mx, fx, w, p, mx_m, fx_m, w_m, p_m, df, n_number, a_number = prepare_data()
+di_for_dropdown_plot = data_for_dropdown_plot(mx, fx, w, p, mx_m, fx_m, w_m, p_m, df, n_number, a_number)
 
 '''App'''
 
@@ -30,14 +31,14 @@ app.layout = html.Div([
 '''callback'''
 
 @app.callback(
-    Output('plot', 'children'),
+    Output('3d_plot', 'children'),
     Input('dropdown1', 'value')
 )
 def choise_plot(key):
     try:
-        plot = dcc.Graph(figure=di[key])
+        plot = dcc.Graph(figure=di_for_dropdown_plot[key])
     except:
-        plot = html.Div('Пожалуйста, выберете данные в поле выше', style={'margin-top': '10px'})
+        plot = html.Div('Пожалуйста, выберите данные в поле выше', style={'margin-top': '10px'})
     return plot
 
 if __name__ == "__main__":

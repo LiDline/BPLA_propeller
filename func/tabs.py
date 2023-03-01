@@ -1,6 +1,8 @@
 import dash_bootstrap_components as dbc
 from dash import html, dcc
 
+
+from func.graph_2d import graph_2d
 # from func.cross_points_f import cross_points_f
 # from func.cross_points_mx_w import cross_points_mx_w
 
@@ -18,7 +20,8 @@ def tabs():
 
     tab1_content = dbc.Card(
         dbc.CardBody(
-            [dbc.Row([
+            [
+                dbc.Row([
                 dbc.Col(html.Div('Выбор данных:'))
             ]),
             dbc.Row([
@@ -26,8 +29,7 @@ def tabs():
             ]),
             # 3D graphs
             dbc.Row([
-                dbc.Col([html.Div(id='plot')], md=6),
-                # dbc.Col([,
+                dbc.Col([html.Div(id='3d_plot')], md=6),
                 ]),
             ]),
         className="mt-3",)
@@ -35,7 +37,12 @@ def tabs():
     tab2_content = dbc.Card(
         dbc.CardBody(
             [
-                html.P("Здесь будут 2D графики", className="card-text"),
+                dbc.Row([
+                    dbc.Col(html.P("График зависимости тяги от потребляемой мощности", className="card-text"))
+                ]),
+                dbc.Row([
+                    dbc.Col([dcc.Graph(figure=graph_2d())], width={"size": 10, "offset": 0}),
+                ])
             ]),
         className="mt-3",)
     

@@ -2,7 +2,7 @@ import plotly.graph_objects as go
 from datetime import date
 import numpy as np
 
-class graph:
+class graph_3d:
 
     def __init__(self, fig, z_An_matrix, z_An_string, df, a_number, n_number, title_left):
         self.z_An_matrix = z_An_matrix
