@@ -49,7 +49,8 @@ def tabs():
     tab3_content = dbc.Card(
         dbc.CardBody(
             [
-                html.P("Здесь будет описание работы", className="card-text"),
+                html.P("Винт состоит из двух лопастей, представляющих профиль крыла 20 х 4 мм и длинною 150 мм.", className="card-text"),
+                # html.P("На рисунке представлена схема винта.", className="card-text"),
             ]
         ),
         className="mt-3",

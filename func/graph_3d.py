@@ -108,7 +108,7 @@ class graph_3d:
 
         self.fig.update_layout(           #Позиционирование заголовка
             title={
-               'text': f"Двухлопастной винт (20 х 4 х 150 мм); {date.today()}",
+               'text': f"{date.today()}",
                'y':0.97,
                'x':0.5,
                'xanchor': 'center',

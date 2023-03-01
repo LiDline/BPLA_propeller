@@ -15,7 +15,7 @@ di_for_dropdown_plot = data_for_dropdown_plot(mx, fx, w, p, mx_m, fx_m, w_m, p_m
 
 app = Dash(name="graphs", external_stylesheets=[dbc.themes.BOOTSTRAP])
 
-header = html.H1('BPLA', style={'textAlign': 'center','margin-top': '10px'})
+header = html.H1('Двухлопастной винт (20 х 4 х 150 мм)', style={'textAlign': 'center','margin-top': '10px'})
 
 '''layout'''
 
