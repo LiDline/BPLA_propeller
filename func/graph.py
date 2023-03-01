@@ -13,6 +13,8 @@ class graph:
         self.title_left = title_left
         self.fig = fig
 
+    def return_fig(self):
+        return self.fig
 
     # Орисовка сетки на поверхности
     def mesh(self):
@@ -58,14 +60,11 @@ class graph:
 
                                                   #Оформление 
     
-        #Для первой сцены
         tickf = 12
         self.fig.update_layout(autosize=False,
                       scene = {"aspectratio": {"x": 1, "y": 1, "z": 1},  #Масштаб осей
                       'camera_eye': {"x": -2, "y": 2, "z":1.65},
-                    'camera_center' : {"x": 0, "y": 0, "z":0},}, 
-                      width=950, height=500, #Размеры окна
-                      margin=dict(l=10, r=0, b=10, t=50),                  
+                    'camera_center' : {"x": 0, "y": 0, "z":0},},                
         )
 
         self.fig.update_layout(scene=dict(xaxis=dict(title="n, об/мин",
@@ -81,8 +80,7 @@ class graph:
         zaxis=dict(title=self.title_left, backgroundcolor="rgb(200, 200,200)",
                              gridcolor="white",
                              showbackground=True,tickfont=dict(size=tickf),
-                             zerolinecolor="white",)),
-                        margin=dict(r=20, b=10, l=0, t=30))
+                             zerolinecolor="white",)))
         self.fig.update_layout(scene=dict(xaxis_showspikes=False, yaxis_showspikes=False),) #Изменение при наведении мышки
         self.fig.update_scenes(camera_projection_type="orthographic") #вводит ортогональный вид
 
@@ -94,12 +92,13 @@ class graph:
         yanchor="top",
         y=1,
         xanchor="left",
-        x=0.8, 
+        x=0.6, 
         title_font_family="Times New Roman",
     #     bgcolor=None
         ))   
 
-        self.fig.update_layout(autosize=False,width=800,height=600,
+        self.fig.update_layout(
+            autosize=False,width=800,height=700,
             margin=dict(l=50, r=50,b=50,t=50,pad=4))
 
         self.fig.update_layout(
@@ -115,7 +114,7 @@ class graph:
                'xanchor': 'center',
                'yanchor': 'top'})
 
-        self.fig.show()
+        # self.fig.show()
 
 
     # Линия пересечения

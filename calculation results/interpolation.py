@@ -6,6 +6,7 @@ import scipy.interpolate as spi
 """Загрузка таблицы"""
 
 file = (os.path.abspath('calculation results/BPLA, series 1.csv')).replace('\\', '/')
+
 df = pd.read_csv(file, sep = ',', skiprows=3)
 df.rename({'P7': 'a, град','P8': 'n, об/мин','P3': 'fx, Н','P4': 'mx, Н*м',}, axis=1, inplace=True) 
 df = pd.DataFrame(df.iloc[:,1:])
@@ -128,14 +129,14 @@ for i in range (0, len(mx_str)//len(list1)):
     k += a_step_inter
 # print(len(a_str), a_str)
 
-df_inter = pd.DataFrame(columns = ['a, град','n, об/мин','Fx, Н','mx, Н*м',])
+df_inter = pd.DataFrame(columns = ['a, град','n, об/мин','Fx, Н','Mx, Н*м',])
 
 df_inter['a, град'] = a_str
 df_inter['n, об/мин'] = n_str
-df_inter['mx, Н*м'] = mx_str
+df_inter['Mx, Н*м'] = mx_str
 df_inter['Fx, Н'] = fx_str
-df_inter["Wв, Вт"] = df_inter['n, об/мин']*df_inter['mx, Н*м']*np.pi/30
+df_inter["Wв, Вт"] = df_inter['n, об/мин']*df_inter['Mx, Н*м']*np.pi/30
 df_inter['P, Н/Вт'] = df_inter['Fx, Н'] / df_inter['Wв, Вт']
 # df_inter['P, Н/Вт'].replace(np.nan, 0, inplace=True)
 
-df_inter.to_csv('BPLA, series 1 - инт.csv')
+df_inter.to_csv('calculation results/BPLA, series 1 - инт.csv')
