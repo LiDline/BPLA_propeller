@@ -63,7 +63,7 @@ class graph_3d:
         tickf = 12
         self.fig.update_layout(autosize=False,
                       scene = {"aspectratio": {"x": 1, "y": 1, "z": 1},  #Масштаб осей
-                      'camera_eye': {"x": -2, "y": 2, "z":1.65},
+                      'camera_eye': {"x": -1.5, "y": -1.25, "z":1.65},
                     'camera_center' : {"x": 0, "y": 0, "z":0},},                
         )
 
@@ -101,21 +101,14 @@ class graph_3d:
             autosize=False,width=800,height=700,
             margin=dict(l=50, r=50,b=50,t=50,pad=4))
 
-        self.fig.update_layout(
-            title=f"Лопасть 20 х 4 х 150 мм;  {date.today()}",
-            # legend_title="Legend Title",
-            )
 
-        self.fig.update_layout(           #Позиционирование заголовка
-            title={
-               'text': f"{date.today()}",
-               'y':0.97,
-               'x':0.5,
-               'xanchor': 'center',
-               'yanchor': 'top'})
-
-        # self.fig.show()
-
+        # self.fig.update_layout(           #Позиционирование заголовка
+        #     title={
+        #        'text': f"{date.today()}",
+        #        'y':0.97,
+        #        'x':0.5,
+        #        'xanchor': 'center',
+        #        'yanchor': 'top'})
 
     # Линия пересечения
     def cross_line(self, x, z, f, color='black', showlegend=True):

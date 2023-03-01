@@ -18,6 +18,6 @@ def graph_2d():
 
     fig.update_layout(
         # autosize=False, width=900, height=600,
-        margin=dict(l=80, r=100,b=50,t=50,pad=4)
+        margin=dict(l=80, r=50,b=50,t=50,pad=4)
         )
     return fig

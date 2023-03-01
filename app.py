@@ -4,8 +4,8 @@ import dash_bootstrap_components as dbc
 
 
 from func.prepare_data import prepare_data
-from func.tabs import tabs
-from func.data_for_dropdown_plot import data_for_dropdown_plot
+from func.func_dash.tabs import tabs
+from func.func_dash.data_for_dropdown_plot import data_for_dropdown_plot
 
 '''Data for dropdown graphs'''
 mx, fx, w, p, mx_m, fx_m, w_m, p_m, df, n_number, a_number = prepare_data()
