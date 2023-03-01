@@ -4,10 +4,7 @@ from dash import html, dcc
 # from func.cross_points_f import cross_points_f
 # from func.cross_points_mx_w import cross_points_mx_w
 
-
 def tabs():
-
-    
     # Меню выбора графика
     names = ["Fx, Н", "Mx, Н*м", "Wв, Вт", "P, Н/Вт"]
     options = []
