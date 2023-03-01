@@ -19,7 +19,10 @@ def tabs():
     tab1_content = dbc.Card(
         dbc.CardBody(
             [dbc.Row([
-                dbc.Col([dropdown], width={"size": 3}, style={'margin-top': '10px'})
+                dbc.Col(html.Div('Выбор данных:'))
+            ]),
+            dbc.Row([
+                dbc.Col([dropdown], width={"size": 1}, style={'margin-top': '10px'})
             ]),
             # 3D graphs
             dbc.Row([

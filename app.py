@@ -37,7 +37,7 @@ def choise_plot(key):
     try:
         plot = dcc.Graph(figure=di[key])
     except:
-        plot = html.Div('Пожалуйста, выберете данные', style={'margin-top': '10px'})
+        plot = html.Div('Пожалуйста, выберете данные в поле выше', style={'margin-top': '10px'})
     return plot
 
 if __name__ == "__main__":
