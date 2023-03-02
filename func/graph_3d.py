@@ -1,5 +1,4 @@
 import plotly.graph_objects as go
-from datetime import date
 import numpy as np
 
 class graph_3d:
@@ -174,7 +173,7 @@ class graph_3d:
 
     # Горизонтальная плоскость                                            
     def horizontal_cross_palne(self, f):
-        opa_0_plane = 0.3
+        opa_0_plane = 1
 
         self.fig.add_trace(go.Scatter3d(x=[0, self.df['n, об/мин'].max(), self.df['n, об/мин'].max(), 0, 0],
                                        y=[0, 0, self.df['a, град'].max(), self.df['a, град'].max(), 0],
@@ -185,6 +184,25 @@ class graph_3d:
         self.fig.add_trace(go.Scatter3d(x=[0, self.df['n, об/мин'].max(), self.df['n, об/мин'].max(), 0, 0],
                                        y=[0, 0, self.df['a, град'].max(), self.df['a, град'].max(), 0],
                                        z=[f, f, f, f, f], showlegend=False,
+                                       surfaceaxis=-1, 
+                                       opacity=1, legendgroup=f"group{f}",
+                                       marker=dict(size=2, color='black')))
+        
+
+    # Вертикальная плоскость                                            
+    def vertical_cross_palne(self, f):
+        opa_0_plane = 1  
+        self.fig.add_trace(go.Scatter3d(x=[0, self.df['n, об/мин'].max(), self.df['n, об/мин'].max(), 0, 0],
+                                       y=[f, f, f, f, f],
+                                       z=[0, 0, 80, 80, 0], showlegend=False,
+                                       surfaceaxis=1, 
+                                       opacity=opa_0_plane, legendgroup=f"group{f}",
+                                       marker=dict(size=1, color='white', colorscale='Viridis',)))
+        
+        
+        self.fig.add_trace(go.Scatter3d(x=[0, self.df['n, об/мин'].max(), self.df['n, об/мин'].max(), 0, 0],
+                                       y=[f, f, f, f, f],
+                                       z=[0, 0, 80, 80, 0], showlegend=False,
                                        surfaceaxis=-1, 
                                        opacity=1, legendgroup=f"group{f}",
                                        marker=dict(size=2, color='black')))
